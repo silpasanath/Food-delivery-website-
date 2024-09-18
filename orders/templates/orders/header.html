@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Option 1: Include in HTML -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <!-- For the toasts -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="">
+
+    {% load static %}
+   
+    <link rel="stylesheet" href="{% static 'orders/style.css' %}">
+
+    <title>Nurani Infotech</title>
+  </head>
+  <body>
+
+<div class="nav bg-dark">
+  <nav class="container navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">TasteyKitchen</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarText">
+      {% if user.is_authenticated %}
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Menu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/directions">Directions</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/hours">Hours</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact Us</a>
+        </li>
+      </ul>
+      <span class="navbar-text">
+        <a href="/view-orders" class="btn btn-info">View Orders</a>
+        <a href="/cart" id="cart_button" class="btn btn-light" style="color:black;">My Cart <i class="fa fa-shopping-cart" style="font-size:24px;"></i></a>
+
+        <button type="button" class="btn btn-dark" onclick="logout()">Logout</button>
+      </span>
+      {% endif %}
+    </div>
+  </nav>
+</div>
+    {% block header %}
+   <div class="bgheader" >
+    <h3 style="text-align:  center;">Home</h3>
+   </div>
+   {% endblock %}
+
+
+
+  {% block content %}
+  {% endblock %}
+
+<!-- footer -->
+
+<footer class=" text-center" style="background-color: rgba(0, 0, 0, 0.05);">
+  <!-- Grid container -->
+  <div class="container p-4 pb-0">
+    <!-- Section: Social media -->
+    <section class="mb-4">
+      <!-- Facebook -->
+      <a
+      data-mdb-ripple-init
+        class="btn text-white btn-floating m-1"
+        style="background-color: #3b5998;"
+        href="#!"
+        role="button"
+        ><i class="bi bi-facebook"></i></a>
+
+      <!-- Twitter -->
+      <a
+        data-mdb-ripple-init
+        class="btn text-white btn-floating m-1"
+        style="background-color: #55acee;"
+        href="#!"
+        role="button"
+        ><i class="bi bi-twitter"></i></a>
+
+      <!-- Google -->
+      <a
+        data-mdb-ripple-init
+        class="btn text-white btn-floating m-1"
+        style="background-color: #dd4b39;"
+        href="#!"
+        role="button"
+        ><i class="bi bi-google"></i></a>
+
+      <!-- Instagram -->
+      <a
+        data-mdb-ripple-init
+        class="btn text-white btn-floating m-1"
+        style="background-color: #ac2bac;"
+        href="#!"
+        role="button"
+        ><i class="bi bi-instagram"></i></a>
+
+      <!-- Linkedin -->
+      <a
+        data-mdb-ripple-init
+        class="btn text-white btn-floating m-1"
+        style="background-color: #0082ca;"
+        href="#!"
+        role="button"
+        ><i class="bi bi-linkedin"></i></a>
+      <!-- Github -->
+      <a
+        data-mdb-ripple-init
+        class="btn text-white btn-floating m-1"
+        style="background-color: #333333;"
+        href="#!"
+        role="button"
+        ><i class="bi bi-github"></i></a>
+    </section>
+    <!-- Section: Social media -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="bg-dark text-white text-center p-3" >
+
+    <a class="text-white" href="#">TasteyKitchen</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+<!-- footer end -->
+<form action="" method="post" id="rateform">
+  {% csrf_token %}
+  <input type="hidden" id="rtg" name="rtg">
+  <input type="hidden" id="pid" name="pid">
+</form>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src = "{% static 'orders/main.js' %}"></script>
+    <script>
+
+
+ function incrementValue(id,amount){
+  const inputelement = document.getElementById(`quantity${id}`);
+  const pelement = document.getElementById(`price${id}`);
+  const price = pelement.querySelector('strong')
+  inputelement.value = parseInt(inputelement.value)+1
+  price.textContent = parseInt(amount)*parseInt(inputelement.value)
+
+ }
+ function decrementValue(id,amount){
+  const inputelement = document.getElementById(`quantity${id}`);
+  const pelement = document.getElementById(`price${id}`);
+  const price = pelement.querySelector('strong')
+  let currentvalue = parseInt(inputelement.value);
+  inputelement.value = currentvalue > 1 ? currentvalue-1:1
+  let currentprice = parseInt(price.textContent);
+  let intprice = currentprice-parseInt(inputelement.value)
+  amount =parseInt(amount)
+  price.textContent = currentprice === amount?amount: currentprice - amount
+ }
+  </script> 
+
+<script>
+  function ratehotel(id) {
+    const rating = document.getElementById(`rating${id}`)
+    const show = document.getElementById(`show${id}`)
+    show.classList.toggle('show')
+    //children of rating which contains class .star
+    const star = rating.children
+    for (const str of star) {
+      str.addEventListener('click', function() {
+        selectedRating = parseInt(str.getAttribute('data-value'));
+        updateRating(selectedRating,id);
+      });
+    };
+  
+  }
+
+  
+
+
+  function updateRating(rating,id) {
+    const rtg =  document.getElementById('rtg')
+    const pid =  document.getElementById('pid')
+    const stars = document.getElementById(`rating${id}`).children
+    console.log(stars.length);
+      for (let i = 0; i < stars.length; i++) {
+        if (i < rating) { 
+          stars[i].classList.add('selected');
+        } else {
+          stars[i].classList.remove('selected');
+        }
+      }
+      rtg.value = rating;
+      pid.value=id
+      console.log(id,rating);
+    }
+
+    function rating(){
+      console.log('hello')
+      document.getElementById('rateform').submit();
+
+    }
+  </script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+#khra{
+  color: pink;
+}
+
+.bgheader{
+  color: white;
+  background-color: #333;
+  background-image: url('images/bg_ad.png');
+  background-size: contain;
+}
+.hbg{
+  background-image: url('images/ad.jpg');
+  height: 300px;
+  background-size: cover;
+}
+
+
+
+.logbg{
+  background-image:url('images/ad.jpg') ;
+  background-size: cover;
+}
+
+.star {
+  cursor: pointer;
+  font-size: 30px;
+}
+
+.selected {
+  color: gold;
+}
+
+
+
+.hide{
+  display: none;
+}
+.show{
+  display: flex;
+  justify-content: space-around;
+}

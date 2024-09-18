@@ -1,0 +1,86 @@
+{% extends 'orders/header.html' %}
+
+{% block header %}
+{% load static %}
+<div class="bgheader py-3" >
+  <div class="container ">
+    <div class="row justify-content-start ">
+      <div class="col-12 col-md-4 rounded">
+        <img class="rounded" src="{% static 'orders/images/salad.jpg' %}">
+      </div>
+  
+     <div class="content col-12 col-md-6 ">
+       <h2>NMR</h2>
+       <br>
+       <h4>Lorem ipsum dolor sit amet.</h4>
+       <br>
+       <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae sit quo natus, repudiandae illo nostrum deserunt saepe mollitia unde est!</p>
+     </div>
+   </div>
+  </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+<div class="container my-3">
+  <h3>Today's Special 
+  </h3>
+  <br>
+  <hr>
+  <div class="container py-3">
+  
+  
+    <h4 style="margin:10px; text-align:center;"> Choose your menu &#x1f957 </h4>
+    <div class="row justify-content-around">
+  
+      {% for dish in dishes.object_list %}
+          <div class="card" style="width: 18rem; margin: 20px;">
+            <img src="{% static dish.img %}" class="card-img-top" alt="gif for category item" style="width:100%;">
+            <div class="card-body">
+              <h5 class="card-title" >{{dish.dish_name}}</h5>
+              <p onclick="ratehotel({{dish.id}})" style="cursor:pointer"> <span class="text-success " style="font-size:1.3em;">&#9733;</span><strong>{{dish.rating}}</strong></p>
+              <div id="show{{dish.id}}" class="hide ">
+              <div id="rating{{dish.id}}" >
+                <span class="star" data-value="1">&#9733;</span>
+                <span class="star" data-value="2">&#9733;</span>
+                <span class="star" data-value="3">&#9733;</span>
+                <span class="star" data-value="4">&#9733;</span>        
+                <span class="star" data-value="5">&#9733;</span>
+              </div>
+              <button class="btn btn-primary" onclick="rating()">ok</button>
+              </div>
+            </div>
+            <div class="input-group " >
+              <div class="input-group-prepend">
+                  <button class="btn btn-outline-secondary" type="button" onclick="decrementValue({{dish.id}}, {{dish.price}})">-</button>
+              </div>
+              <input type="text" class="form-control text-center" id="quantity{{dish.id}}" value="1">
+              <div class="input-group-append">
+                  <button class="btn btn-outline-secondary " type="button" onclick="incrementValue({{dish.id}}, {{dish.price}})">+</button>
+              </div>
+              <button type="button" class="btn btn-primary col-6" id="price{{dish.id}}" onclick="add_to_cart({item_description:'NMR - {{dish.dish_name}}' , price: this.querySelector('strong').textContent,quantity: document.querySelector('#quantity{{dish.id}}').value  })"><strong>{{dish.price}}</strong></button>
+          </div>
+  
+          </div>
+      {% endfor %}
+  
+    </div>
+  
+  </div>
+  <!-- pagination -->
+  <div style="text-align: center;">
+    {%if dishes.has_previous %} {# whether the previous page exists #}
+        <a href="?page={{dishes.previous_page_number}}"><</a> {# link to the prev page #}
+    {% endif %}
+    <span>{{dishes.number}}</span> {# the current page number #}
+   
+    {%if dishes.has_next %} {# whether the next page exists #}
+        <a href="?page={{dishes.next_page_number}}">></a> {# link to the next page #}
+    {% endif %}
+  </div >
+</div>
+
+
+
+
+{% endblock %}
